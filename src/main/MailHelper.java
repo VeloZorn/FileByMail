@@ -1,12 +1,13 @@
+package main;
 public class MailHelper {
  
     public static void main(String[] args) {
          
         try {
             //Mailprogramm öffnen mit "Empfänger", "Betreff", "Nachricht"
-            composeEmail("amkorga@gmail.com",
-                         "Danke für das Snippet!",
-                         "Hallo Raffael,\r\ndiese Mail wurde per Java-Snippet versendet.");
+            composeEmail("test@mail.com",
+                         "Betreff",
+                         "Mail Text");
         }
         catch (Exception err) {
           err.printStackTrace();
