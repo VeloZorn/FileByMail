@@ -7,7 +7,8 @@ public class MailHelper {
             //Mailprogramm öffnen mit "Empfänger", "Betreff", "Nachricht"
             composeEmail("test@mail.com",
                          "Betreff",
-                         "Mail Text");
+                         "Mail Text",
+                         "file:///C:\\Users\\amkor\\Desktop\\test.txt");
         }
         catch (Exception err) {
           err.printStackTrace();
@@ -15,11 +16,13 @@ public class MailHelper {
         System.out.println("Done!");
     }
      
-    public static void composeEmail(String receiver, String subject, String body) throws Exception {
+    public static void composeEmail(String receiver, String subject, String body, String attachment) throws Exception {
         //Mailto-URI zusammensetzen. Betreff und Body müssen encodiert werden      
         String mailto = "mailto:" + receiver;       
         mailto += "?subject=" + uriEncode(subject);
         mailto += "&body=" + uriEncode(body);
+        mailto += "&attachment='" + attachment + "'";
+        System.out.println(mailto);
          
         //Run-Befehl je nach Betriebssystem erzeugen
         String cmd = "";

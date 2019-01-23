@@ -72,7 +72,7 @@ public class MailHelperGUI extends MailHelper{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					composeEmail(mailAdresseGUI.getText(), mailBetreffGUI.getText(), mailTextGUI.getText());
+					composeEmail(mailAdresseGUI.getText(), mailBetreffGUI.getText(), mailTextGUI.getText(), null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
