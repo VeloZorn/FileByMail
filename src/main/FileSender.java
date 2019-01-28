@@ -11,14 +11,15 @@ import org.apache.commons.io.IOUtils;
 
 public class FileSender {
 	
-	private static String fileAttachment = "C:\\Users\\amkor\\Desktop\\test.txt";
+	private static String fileInputPath = "C:\\Users\\amkor\\Desktop\\test.txt";
+	private static String fileOutputPath = "C:\\Users\\amkor\\Desktop\\demo.txt";
 
 	public static void main(String[] args) {
 
 		try {
 			// File in .tmp umwandeln und in Anhang anfügen
 			createTemporaryFile();
-			composeEmail(fileAttachment);
+			composeEmail(fileOutputPath);
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
@@ -31,16 +32,14 @@ public class FileSender {
 
 		// Run-Befehl je nach verwendetem Mail Programm erzeugen
 		String cmd = ""; // TODO Über Input Stream
-		String os = System.getProperty("os.name").toLowerCase(); //
-		if (os.contains("win") && thunderbird == true) { //
-			cmd = "cmd /c start thunderbird.exe -compose attachment='" + "file:///" + attachment + "'"; // Thunderbird
-																										// Support
-																										// //TODO Create
-																										// Temp file as
-																										// attachment
-		} //
-		else if (os.contains("win") && thunderbird == false) { //
-			cmd = "cmd /c start outlook.exe /a " + attachment; // Outlook Support //TODO Create Temp file as attachment
+		String os = System.getProperty("os.name").toLowerCase(); 
+		//Thunderbird
+		if (os.contains("win") && thunderbird == true) { 
+			cmd = "cmd /c start thunderbird.exe -compose attachment='" + "file:///" + attachment + "'";																			// attachment
+		} 
+		//Outlook
+		else if (os.contains("win") && thunderbird == false) { 
+			cmd = "cmd /c start outlook.exe /a " + attachment;
 		} else {
 			System.out.println("Wrong Operation System");
 		}
@@ -50,21 +49,19 @@ public class FileSender {
 
 	}
 
-	public static File createTemporaryFile() throws IOException {
-		String[] input = fileAttachment.split("\\\\");
-		String filePrefix = input[(input.length - 1)];
-		String fileSuffix = ".tmp";
-		System.out.println(filePrefix);
-		
+	public static void createTemporaryFile() throws IOException {
 		try {
-			InputStream fileInput = new FileInputStream(fileAttachment);
-			File tmpFile = File.createTempFile(filePrefix, fileSuffix, fileAttachment);
+			InputStream fileInput = new FileInputStream(fileInputPath);
+			FileOutputStream tmpFile = new FileOutputStream(new File(fileOutputPath));
+			int byteRead;
+			while((byteRead = fileInput.read()) != -1) {
+				tmpFile.write(byteRead);
+			}
+			
 		} catch (FileNotFoundException e) {
-			System.out.println("Could not convert " + fileAttachment);
+			System.out.println("Could not convert " + fileInputPath);
 			e.printStackTrace();
 		}
-		
-		return null;
 
 	}
 
