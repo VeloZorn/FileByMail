@@ -11,6 +11,9 @@ import org.apache.commons.io.IOUtils;
 
 public class FileSender {
 	
+	//TODO	Mehrere Files auf einmal versenden und einlesen
+	//TODO	GUI mit Namensgebung
+	
 	private static String fileInputPath = "C:\\Users\\amkor\\Desktop\\test.txt";
 	private static String fileOutputPath = "C:\\Users\\amkor\\Desktop\\demo.txt";
 
