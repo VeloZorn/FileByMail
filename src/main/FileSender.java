@@ -40,8 +40,8 @@ public class FileSender {
 			zipOutput();
 			composeEmail();
 			File deleteFile = new File(zipOut);
-			Thread.sleep(10000);
-			deleteFile.delete();
+			//Thread.sleep(10000);
+			//deleteFile.delete();
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
